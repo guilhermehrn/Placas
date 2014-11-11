@@ -8,8 +8,7 @@
 #include "Localizador.hpp"
 
 Localizador::Localizador() {
-	// TODO Auto-generated constructor stub
-
+	//padrao
 }
 
 /**
