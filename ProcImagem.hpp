@@ -11,7 +11,6 @@
 #include <iostream>
 #include <math.h>
 
-
 #include <cv.h>
 #include <cvaux.h>
 #include <highgui.h>
@@ -24,11 +23,10 @@ using namespace std;
  * Essa classe representa uma dada imagem a ser processada. E inclui algumas ferramentas para
  * manipulação da mesma.
  */
-class ProcImagem{
+class ProcImagem {
 private:
 
-	cv::Mat imgColor;// Representa uma imagem colorida
-	cv::Mat imgCinza;//Armasena uma imagem em tom de cinza.
+	cv::Mat imagem; // Representa uma imagem dentro do objeto.
 
 public:
 
@@ -37,7 +35,6 @@ public:
 	 *Param.imagem:Caminho da imagem no disco.
 	 */
 	ProcImagem(char *imagem);
-
 
 	/**
 	 * Construtor padrão do tipo ProcImagem.
@@ -48,45 +45,36 @@ public:
 	 * Retorna a imagem colorido no obijeto.
 	 * return.: retorna um objeto do tipo Mat, a imagem propriamente dita.
 	 */
-	cv::Mat getImgColor();
-
+	cv::Mat getImagem();
 
 	/**
 	 * Altera a imagem colorida do objeto.
 	 * param. imgColor: nova imagem a ser iserida no objeto.
 	 */
-	void setImgColor(cv::Mat imgColor);
+	void setImagem(cv::Mat imgColor);
 
 	/**
-	 * Retorna a imagem em escala de cinza. (ATENCÂO!) Não usar antes fazer uma
-	 * transformação em escala de cinza com o metodo "transformarCinza()".
-	 * return.: retorna um objeto do tipo Mat, a imagem propriamente dita.
+	 * Converte uma imagem colorida corrente dentro do objeto (no atributo imagem)
+	 * em uma imagem de escala de cinza.
 	 */
-	cv::Mat getImgCinza();
-
-
-	/**
-	 * Converte uma imagem colorida em uma imagem de escala de cinza.
-	 * return.: retorna um objeto do tipo Mat, a imagem em cinza propriamente dita.
-	 */
-	cv::Mat transformarCinza();
+	void transformarCinza();
 
 	/**
 	 * Faz o realce das bordas atravez da tecnica boton-hat por fechamento. Essa
 	 * função ressalta as variações na imagem.
 	 * param. morph_elem: tipo de elemento.
 	 * param. morph_size: Tamanho do elemento estruturante
-	 * return.: retorna um objeto do tipo Mat, a imagem com as bordas realçadas propriamente dita.
+	 * retorna dentro do proprio objeto (Atributo imagem), a imagem com as bordas realçadas
+	 * propriamente dita.
 	 */
-	cv::Mat realcarBordas(int morph_elem, int morph_size);
-
+	void realcarBordas(int morph_elem, int morph_size);
 
 	/**
 	 * Faz a Binarização de uma imagem pelo método de Otsu.
 	 * param. img_entrada: imagem a ser binarizada.
-	 * return.: retorna um objeto do tipo Mat, a imagem binarizada propriamente dita.
+	 * return.: retorna dentro do proprio objeto (Atributo imagem), a imagem binarizada propriamente dita.
 	 */
-	cv::Mat binarizarImagem (cv::Mat img_entrada);
+	void binarizarImagem();
 
 	/**
 	 * Destrutor do objeto

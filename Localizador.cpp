@@ -19,36 +19,51 @@ Localizador::Localizador(cv::Mat imagem) {
 }
 
 /**
- * Fucão que realiza a operação de fechemento
- * param. imagem: imagem onde sera feita a operação de fechamento
- * param. nucleo: tipo elemento que estruturante que vai ser usado no fechamento
- * param. tamanho: tamanho do elemento estruturante.
- * return: objeto do tipo Mat, a imagem resultante.
+ * retorna a imagem corrente dentro do objeto
+ * return: imagem corrente.
  */
-cv::Mat Localizador::fazerFechamento(cv::Mat imagem, int nucleo, int tamanho) {
-	cv::Mat img_fechada;
-	cv::Mat elemento = cv::getStructuringElement(nucleo,
-			cv::Size(2 * tamanho, 2 * tamanho), cv::Point(tamanho, tamanho));
-
-	cv::morphologyEx(imagem, img_fechada, 3, elemento);
-	return img_fechada;
+cv::Mat Localizador::getImagem() {
+	return this->imagem;
 }
 
 /**
- * Fucão que realiza a operação de Abertura da imagem de entrada.
- * param. imagem: imagem onde sera feita a operação de abertura
+ * Muda a imagem corrente dentro do objeto.
+ */
+void Localizador::setImagem(cv::Mat imagem) {
+	this->imagem = imagem;
+}
+
+/**
+ * Fucão que realiza a operação de fechemento
  * param. nucleo: tipo elemento que estruturante que vai ser usado no fechamento
  * param. tamanho: tamanho do elemento estruturante.
- * return: objeto do tipo Mat, a imagem resultante.
+ * return: a imagem resultante apos o fechamento. Retorna no proprio atributo do objeto (imagem).
  */
-cv::Mat Localizador::fazerAbertura(cv::Mat imagem, int nucleo, int tamanho) {
+void Localizador::fazerFechamento(int nucleo, int tamanhoLin, int tamanhoCol) {
+	cv::Mat img_fechada;
+	cv::Mat elemento = cv::getStructuringElement(nucleo,
+			cv::Size(2*tamanhoLin, 2*tamanhoCol),
+			cv::Point(tamanhoLin, tamanhoCol));
+
+	cv::morphologyEx(this->imagem, img_fechada, 3, elemento);
+	this->imagem = img_fechada;
+}
+
+/**
+ * Fucão que realiza a operação de Abertura da imagem corrente no objeto.
+ * param. nucleo: tipo elemento que estruturante que vai ser usado no fechamento
+ * param. tamanho: tamanho do elemento estruturante.
+ * return: retorna no proprio objeto (no atributo "imagem"), a imagem resultante.
+ */
+void Localizador::fazerAbertura(int nucleo, int tamanhoLin, int tamanhoCol) {
 
 	cv::Mat img_aberta;
 	cv::Mat elemento = cv::getStructuringElement(nucleo,
-			cv::Size(2 * tamanho, 2 * tamanho), cv::Point(tamanho, tamanho));
+			cv::Size(2 * tamanhoLin, 2 * tamanhoCol),
+			cv::Point(tamanhoLin, tamanhoCol));
 
 	cv::morphologyEx(imagem, img_aberta, 2, elemento);
-	return img_aberta;
+	this->imagem = img_aberta;
 }
 
 /**
@@ -60,8 +75,8 @@ cv::Mat Localizador::fazerAbertura(cv::Mat imagem, int nucleo, int tamanho) {
  */
 cv::Mat Localizador::marcarPlaca(cv::Mat imagem, cv::Point super,
 		cv::Point infer, cv::Scalar cor) {
-	cv::rectangle(imagem, super, infer, cor, 3);
-	return imagem;
+	cv::rectangle(this->imagem, super, infer, cor, 3);
+	return this->imagem;
 }
 
 /**

@@ -17,7 +17,9 @@
 class Localizador {
 
 private:
+
 	cv::Mat imagem;
+
 public:
 	/**
 	 * Costrutor padrão
@@ -30,22 +32,32 @@ public:
 	Localizador(cv::Mat imagem);
 
 	/**
-	 * Fucão que realiza a operação de fechemento
-	 * param. imagem: imagem onde sera feita a operação de fechamento
-	 * param. nucleo: tipo elemento que estruturante que vai ser usado no fechamento
-	 * param. tamanho: tamanho do elemento estruturante.
-	 * return: objeto do tipo Mat, a imagem resultante.
+	 * retorna a imagem corrente dentro do objeto
+	 * return: imagem corrente.
 	 */
-	cv::Mat fazerFechamento(cv::Mat imagem, int nucleo, int tamanho);
+	cv::Mat getImagem();
 
 	/**
-	 * Fucão que realiza a operação de Abertura da imagem de entrada.
-	 * param. imagem: imagem onde sera feita a operação de abertura
+	 * Muda a imagem corrente dentro do objeto.
+	 */
+	void setImagem(cv::Mat imagem);
+
+	/**
+	 * Fucão que realiza a operação de fechemento
 	 * param. nucleo: tipo elemento que estruturante que vai ser usado no fechamento
 	 * param. tamanho: tamanho do elemento estruturante.
-	 * return: objeto do tipo Mat, a imagem resultante.
+	 * return: a imagem resultante apos o fechamento. Retorna no proprio atributo do objeto (imagem).
 	 */
-	cv::Mat fazerAbertura(cv::Mat imagem, int nucleo, int tamanho);
+	void fazerFechamento(int nucleo, int tamanhoLin, int tamanhoCol);
+
+
+	/**
+	 * Fucão que realiza a operação de Abertura da imagem corrente no objeto.
+	 * param. nucleo: tipo elemento que estruturante que vai ser usado no fechamento
+	 * param. tamanho: tamanho do elemento estruturante.
+	 * return: retorna no proprio objeto (no atributo "imagem"), a imagem resultante.
+	 */
+	void fazerAbertura(int nucleo, int tamanhoLin, int tamanhoCol);
 
 	/**
 	 * Funcão que faz a operação de dilatação de uma região da imagem.
