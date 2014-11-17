@@ -42,7 +42,7 @@ void Localizador::setImagem(cv::Mat imagem) {
 void Localizador::fazerFechamento(int nucleo, int tamanhoLin, int tamanhoCol) {
 	cv::Mat img_fechada;
 	cv::Mat elemento = cv::getStructuringElement(nucleo,
-			cv::Size(2*tamanhoLin, 2*tamanhoCol),
+			cv::Size(2*tamanhoLin,2*tamanhoCol),
 			cv::Point(tamanhoLin, tamanhoCol));
 
 	cv::morphologyEx(this->imagem, img_fechada, 3, elemento);

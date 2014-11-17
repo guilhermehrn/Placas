@@ -14,17 +14,30 @@ int main(int argc, char **argv) {
 
 	procImagem->transformarCinza();
 
-	procImagem->realcarBordas(2,11);
+	procImagem->realcarBordas(2,13);
 
 	procImagem->binarizarImagem();
 
 	imgBinaria = procImagem -> getImagem();
 
+
 	localizador = new Localizador(imgBinaria);
 
-	localizador->fazerFechamento(1,1,4);
+	localizador->fazerFechamento(1,1,14);
 
-	imagem = procImagem->getImagem();
+	localizador -> fazerAbertura(1,35,2);
+	localizador -> fazerAbertura(1,25,2);
+
+
+
+	//localizador->fazerFechamento(1,6,5);
+	//localizador->fazerFechamento(1,1,6);
+
+	//localizador ->fazerAbertura(1,1,30);
+	//localizador->fazerFechamento(1,1,20);
+
+
+	//imagem = procImagem->getImagem();
 	imagem = localizador->getImagem();
 	imshow("imagem", imagem);
 

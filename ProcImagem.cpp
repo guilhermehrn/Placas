@@ -66,9 +66,12 @@
 					cv::Point(morph_size, morph_size));
 
 		cv::Mat mat_img_cinza(this->imagem);
+
 		cv::morphologyEx(mat_img_cinza, img_botton_hat,5, element);
 
 		this->imagem = img_botton_hat;
+		cv::morphologyEx(img_botton_hat,this->imagem,6,element);
+
 	}
 
 	/**
@@ -78,7 +81,7 @@
 	 */
 	void ProcImagem::binarizarImagem (){
 		cv::Mat	img_saida;
-		cv::threshold (this->imagem, img_saida,0.0,255.0,CV_THRESH_OTSU); //CV_THRESH_OTSU CV_THRESH_BINARY
+		cv::threshold (this->imagem, img_saida,150.0,255.0,CV_THRESH_OTSU); //CV_THRESH_OTSU CV_THRESH_BINARY
 		this->imagem =  img_saida;
 	}
 
