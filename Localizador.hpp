@@ -64,7 +64,7 @@ public:
 	 */
 	cv::Mat fazerDilatacaoregiao();
 
-	cv::Mat fazerSeguimentacao();
+	void LocalizarPosicao(int &x, int &y);
 
 	/**
 	 * Funcão que marca ou circula o local da placa.

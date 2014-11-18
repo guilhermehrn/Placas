@@ -75,8 +75,40 @@ void Localizador::fazerAbertura(int nucleo, int tamanhoLin, int tamanhoCol) {
  */
 cv::Mat Localizador::marcarPlaca(cv::Mat imagem, cv::Point super,
 		cv::Point infer, cv::Scalar cor) {
-	cv::rectangle(this->imagem, super, infer, cor, 3);
-	return this->imagem;
+
+	cv::Mat a = imagem;
+	cv::rectangle(a, super, infer, cor, 3);
+	return a;
+}
+
+
+void Localizador::LocalizarPosicao(int &x, int &y){
+	int xa, ya;
+
+	cv::Scalar somaMax,somaMax2;
+	somaMax.val[0] = 0;
+	xa = 0 ;
+	ya = 0;
+
+	for (int i = 0; i< this->imagem.rows - 50; i++){
+		for (int j = 0; j< this->imagem.cols - 250; j++){
+			cv::Rect rec(j,i,250,50);
+			cv::Mat crop(this->imagem,rec);
+
+			somaMax2 = cv::sum(crop);
+
+
+
+			if(somaMax2.val[0] > somaMax.val[0]){ //implementar
+				 somaMax = somaMax2;
+				ya = i;
+				xa = j;
+			 }
+		}
+
+	}
+	x = xa;
+	y = ya;
 }
 
 /**
